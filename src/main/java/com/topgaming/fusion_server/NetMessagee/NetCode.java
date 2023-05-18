@@ -1,10 +1,16 @@
 package com.topgaming.fusion_server.NetMessagee;
 
+
 public enum NetCode {
 
     None(0),
     UserLogin(1001),
-    UserRegister(1002),;
+    UserRegister(1002),
+    VersionControl(1003),
+    UserMoneyGet(1051),
+    UserMoneyAdd(1052),
+    AnnouncementGet(1100),
+    ;
 
     final int code;
 

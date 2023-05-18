@@ -7,6 +7,7 @@ import lombok.Data;
 public class NetMessage {
 
     int code;
+    int status;
 
     public String toJson()
     {
