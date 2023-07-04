@@ -75,8 +75,8 @@ public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
                 System.out.println("检测超时时间！");
                 if (currentTimestamp - lastHeartbeatTimestamp > OverTime) { // 超时时间为30秒
                     System.out.println("Client " + ctx.channel().remoteAddress() + " is offline");
+                    PlayerList.Instance.RemovePlayer(ctx.channel());
                     ctx.close();
-                    //TODO 玩家下线
             }
             }
         }

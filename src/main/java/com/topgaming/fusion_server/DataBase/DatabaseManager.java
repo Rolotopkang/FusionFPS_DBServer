@@ -36,10 +36,10 @@ public class DatabaseManager {
         {
             return con;
         }
-//        String url = "jdbc:mysql://localhost:3306/fusion_test";
-        String url = "jdbc:mysql://47.120.10.76:3306/fusion_test";
+//        String url = "jdbc:mysql://localhost:3306/Fusion";
+        String url = "jdbc:mysql://47.120.10.76:3306/Fusion";
         try {
-            con = DriverManager.getConnection(url, "root", "root");
+            con = DriverManager.getConnection(url, "FusionDatabase", "(YSrfCpN_5");
             sta = con.createStatement();
 //            System.out.println("连接成功");
         } catch (SQLException e) {

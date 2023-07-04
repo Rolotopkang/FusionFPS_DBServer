@@ -17,7 +17,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.InetSocketAddress;
-import java.net.http.HttpClient;
 import java.sql.SQLException;
 
 import static com.topgaming.fusion_server.netty.HeartbeatHandler.HEARTBEAT_SEQUENCE;
