@@ -21,7 +21,7 @@ public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
     public static final ByteBuf HEARTBEAT_SEQUENCE =
             Unpooled.unreleasableBuffer(Unpooled.copiedBuffer("heartbeat", CharsetUtil.UTF_8));
     //超时时间计算
-    private static long OverTime = 10000;
+    private static long OverTime = 20000;
 
     // 发送心跳包
     private void sendHeartbeat(ChannelHandlerContext ctx) {
@@ -59,6 +59,8 @@ public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
         sendHeartbeat(ctx);
+
+        lastHeartbeatTimestamp = System.currentTimeMillis();
     }
 
     // 定时任务发送心跳包，判断客户端是否在线
@@ -68,16 +70,21 @@ public class HeartbeatHandler extends ChannelInboundHandlerAdapter {
             IdleStateEvent event = (IdleStateEvent) evt;
             if (event.state() == IdleState.READER_IDLE) {
                 sendHeartbeat(ctx);
-            }
-            if(event.state() == IdleState.ALL_IDLE)
-            {
+//                System.out.println("读空闲！");
+                //超时检测
                 long currentTimestamp = System.currentTimeMillis();
-                System.out.println("检测超时时间！");
+//                System.out.println("检测超时时间！" +currentTimestamp +"///"+lastHeartbeatTimestamp);
                 if (currentTimestamp - lastHeartbeatTimestamp > OverTime) { // 超时时间为30秒
                     System.out.println("Client " + ctx.channel().remoteAddress() + " is offline");
                     PlayerList.Instance.RemovePlayer(ctx.channel());
                     ctx.close();
-            }
+                }
+//                else if (event.state() == IdleState.WRITER_IDLE) {
+//                System.out.println("写空闲！");
+//            } else if(event.state() == IdleState.ALL_IDLE)
+//            {
+//
+//            }
             }
         }
     }

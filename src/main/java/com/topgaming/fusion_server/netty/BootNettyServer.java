@@ -51,7 +51,7 @@ public class BootNettyServer {
                     channel.pipeline().addLast(new StringDecoder(StandardCharsets.UTF_8));
 
 
-                    channel.pipeline().addLast(new IdleStateHandler(TimeOutSec,0,TimeOutSec*2, TimeUnit.SECONDS));
+                    channel.pipeline().addLast(new IdleStateHandler(TimeOutSec,0,0, TimeUnit.SECONDS));
                     channel.pipeline().addLast(heartbeatHandler);
                     channel.pipeline().addLast(handlerAdapter);
 

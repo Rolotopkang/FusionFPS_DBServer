@@ -17,7 +17,7 @@ public class BootNettyChannelInboundHandlerAdapter extends ChannelInboundHandler
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("收到包体"+ msg.toString());
+//        System.out.println("收到包体"+ msg.toString());
         MessageDispatch.Instance.receiveData(ctx,msg);
     }
 
